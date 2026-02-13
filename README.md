@@ -21,6 +21,7 @@
 <div align="center">
 
 **Yu Shang¹§\*** · Zhuohang Li¹\* · Yiding Ma¹\* · Weikang Su¹\* Xin Jin‡ · Ziyou Wang¹‡ · Lei Jin¹ · 
+
 Xin Zhang¹ · Yinzhou Tang¹ ·  Haisheng Su² · Chen Gao¹ · Wei Wu¹ · Xihui Liu³ · Dhruv Shah⁴ ·  
 Zhaoxiang Zhang⁵ · Zhibo Chen⁶ · Jun Zhu¹ · Yonghong Tian⁷ ·  Tat-Seng Chua⁸ · Wenwu Zhu¹ · **Yong Li¹†**
 
