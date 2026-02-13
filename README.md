@@ -83,7 +83,7 @@ A typical task directory follows the structure below (example: `adjust_bottle/al
 
 </div>
 
-Please refer to [embodied task]() for implementation.
+Please refer to [embodied task](https://github.com/tsinghua-fib-lab/WorldArena/tree/main/embodied_task) for implementation.
 
 ## 🏆 Leaderboard
 
