@@ -80,15 +80,18 @@ We invite you to participate in our human evaluation by providing your judgment 
 
 ## 🙌 Acknowledgement
 
-We gratefully acknowledge the following prior works that inspire and support the video quality metrics of WorldArena:
+We acknowledge [RoboTwin 2.0](https://robotwin-platform.github.io/) for providing the dataset and simulation platform support that enables embodied task evaluation.  
+
+We thank [VPP](https://github.com/roboterax/video-prediction-policy) for providing the IDM framework used in our embodied action planning implementation.
+
+For video quality evaluation, WorldArena references and partially builds upon the code implementations of the following projects:
 
 - [VBench](https://github.com/Vchitect/VBench)  
 - [EWMBench](https://github.com/AgibotTech/EWMBench)  
 - [WorldScore](https://github.com/haoyi-duan/WorldScore)  
 - [EvalCrafter](https://github.com/evalcrafter/EvalCrafter)  
-- [JEDI](https://github.com/oooolga/JEDi)  
+- [JEDI](https://github.com/oooolga/JEDi)
 
-We also thank [VPP](https://github.com/roboterax/video-prediction-policy) for providing the IDM framework used in our embodied action planning implementation.
 
 
 
