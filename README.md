@@ -34,8 +34,8 @@
 
 ## 📢 Updates
 
-- [2026/0213] Initial release.
-- [2026/0213] Leaderboard release.
+- [2026/02/13] Initial release.
+- [2026/02/13] Leaderboard release.
 
 
 ## 🔍 Overview
