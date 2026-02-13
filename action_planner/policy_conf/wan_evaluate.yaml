@@ -1,0 +1,118 @@
+defaults:
+  - /callbacks/rollout/tasks@tasks: new_playtable_tasks
+  - annotations: new_playtable_validation
+  - datamodule: calvin
+output_path: ./evaluate/wan_adjust
+
+model:
+  _target_: policy_models.VPP_policy.VPP_Policy
+
+  video_model: 'vpp_vidar'
+  base_model_folder: ./models/Wan2.2-TI2V-5B 
+  custom_dit_path: ./models/wan_video/wan_video.pt 
+
+
+  tile_size_height: 34
+  tile_size_width: 34
+  tile_stride_height: 18
+  tile_stride_width: 16
+  tiled: true
+
+  _recursive_: false
+  latent_dim: 384
+  multistep: 45
+  sampler_type: 'ddim'
+  num_sampling_steps: 10
+  sigma_data: 0.5
+  sigma_min: 0.001
+  sigma_max: 80
+  noise_scheduler: 'exponential'
+  sigma_sample_density_type: 'loglogistic'
+  use_lr_scheduler: true
+  act_window_size: 45
+  obs_seq_len: 1
+  action_dim: 14
+  action_seq_len: 45
+  use_text_not_embedding: True
+  seed: ${seed}
+  Former_depth: 6
+  Former_heads: 8
+  Former_dim_head: 64
+  Former_num_time_embeds: 12
+  num_latents: 228
+  text_encoder_path: /cephfs/shared/llm/clip-vit-base-patch32
+  pretrained_model_path: /home/disk2/gyj/hyc_ckpt/svd_2camera/checkpoint-100000
+  use_Former: 3d
+  timestep: 20
+  use_all_layer: True
+  extract_layer_idx: 1
+  use_position_encoding: False
+  optimizer:
+    _target_: torch.optim.AdamW
+    transformer_weight_decay: 0.05
+    obs_encoder_weight_decay: 0.05
+    learning_rate: 1e-4
+    betas: [ 0.9, 0.9 ]
+  lr_scheduler:
+    lr_scheduler:
+      init_lr: 1e-4  # This is the peak or maximum learning rate
+      init_lr_scale: 0.1  # This is the ratio of initial learning rate to peak learning rate
+      final_lr_scale: 1e-6  # This is the ratio of final learning rate to peak learning rate
+      total_steps: 50000  # Example total steps, adjust as needed
+      phase_ratio: "(0.02, 0.08, 0.9)"
+      lr: 1e-4
+
+#datamodule
+eval_cfg_overwrite:
+  datamodule:
+    datasets:
+      lang_dataset:
+        lang_folder: lang_annotations
+  overwrite_module_cfg:
+    voltron_cache: /home/disk2/gyj/code/mdt_policy/pretrained_model_weights
+
+ep_len: 360 
+num_sequences: 2000
+num_videos: 10
+lang_embeddings: null
+render: False
+log_wandb: True
+wandb:
+  entity: omeryagmurlu
+debug: False
+dataset_path: /home/disk2/gyj/task_ABC_D
+train_folder: /home/disk2/gyj/hyccode/Video-Prediction-Policy/checkpoint/alllayer1
+model_name: mdt_test
+device: 0
+sampler_type: ddim
+multistep: 45
+num_sampling_steps: 20
+cond_lambda: 1
+cfg_value: 1
+sigma_min: 1.0
+sigma_max: 80
+noise_scheduler: exponential
+
+lang_folder: lang_annotations
+act_seq_len: 45
+obs_seq_len: 1
+future_range: 29
+
+log_dir: ./logs
+slurm: false
+min_window_size: 21 # 21
+max_window_size: 50
+batch_size: 1
+seed: 242
+devices: 0
+goal_window_size: 1
+p_last_state: 0
+log_every: 50
+rollout_lh_skip_epochs: 290
+window_sampling_strategy: 'geometric'
+num_workers: 12
+img_gen_frame_diff: 3
+benchmark_name: calvin_abcd # calvin_abcd
+root_data_dir: /cephfs/shared/hyc/data/calvin/task_ABC_D
+ckpt_path: ./models/wan2.2/ckpts_add_prompt/epoch.pt
+

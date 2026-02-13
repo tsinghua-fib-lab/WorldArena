@@ -1,0 +1,239 @@
+# Training data parameters
+train_args:
+  ########### debug/lora ################
+  debug: False
+  use_lora: False
+  ######### wandb args ##################
+  project_name: "svd_xhand_cleancode"
+  run_name: "clean_code"
+  ######### text args ###################
+  clip_model_path: "/cephfs/shared/llm/clip-vit-base-patch32" # /cephfs/shared/llm/t5-v1_1-large #"/cephfs/shared/llm/clip-vit-base-patch32"
+  clip_token_length: 20
+  position_encode: True 
+
+  clip_img_size: 224
+  use_img_cond: False
+
+  ############ dataset args###############
+  annotation_name: 'annotation' # annotation dirname under dataset_dir path
+  dataset_dir: "/localssd/gyj/opensource_robotdata"
+
+  # dataset: 'sthv2+bridge+rt1+calvin'
+  # prob: [0.4,0.2,0.2,0.2]
+
+  dataset: 'xbot_0318+xbot_0318_2+xbot_0407_pick_420+xbot_0409_pick_220+xbot_0410_pick_260+xbot_0411_cloth_61+xbot_0417_pick_230+xbot_0421_deliver_40+xbot_0429_deliver_95+xbot_0429_pick_135+xbot_0430_cloth_40+xbot_0430_flip_50'
+  prob: [0.08,0.08,0.09,0.06,0.06,0.06,0.09,0.09,0.09,0.09,0.09,0.12]
+
+  tie_weight: True
+  normalize: True
+  pre_encode: True
+  num_workers: 16
+  video_size: [256,256]
+  sequence_length: 16
+  only_one_clip: True
+  ########### train args################
+  log_every: 100
+  global_seed: 12345
+  do_evaluate: False
+  evaluate_checkpoint: False
+  resume_from_checkpoint : False
+  ############ sample args###############
+  validation_num: 32
+  video_num: 3
+  num_frames: 16
+  width: 256
+  height: 256
+  # Whether or not to sample preview during training (Requires more VRAM).
+  sample_preview: True
+  # Number of inference steps when generating the video.
+  num_inference_steps: 30
+  # CFG scale
+  guidance_scale: 7.5 #3.0
+  # fps
+  fps: 7
+  # The motion bucket ID. Used as conditioning for the generation. The higher the number the more motion will be in the video.
+  motion_bucket_id: 127
+  # The number of frames to decode at a time. The higher the chunk size, the higher the temporal consistency between frames,
+  # but also the higher the memory consumption. By default, the decoder will decode all frames at once for maximal quality.
+  # Reduce `decode_chunk_size` to reduce memory usage.
+  decode_chunk_size: 7
+  ##########################################
+ 
+# Pretrained diffusers model path.
+#pretrained_model_path: "output/latent/train_mask_motion" #https://huggingface.co/damo-vilab/text-to-video-ms-1.7b/tree/main
+pretrained_model_path: "/webvid/llm/stable-video-diffusion-img2vid"
+# gradient_accumulation_steps: 2
+
+
+motion_mask: False
+motion_strength: False
+
+# The folder where your training outputs will be placed.
+output_dir: "./output/svd"
+
+# You can train multiple datasets at once. They will be joined together for training.
+# Simply remove the line you don't need, or keep them all for mixed training.
+
+# 'image': A folder of images and captions (.txt)
+# 'folder': A folder a videos and captions (.txt)
+# 'video_blip': The JSON file created with automatic BLIP2 captions using https://github.com/ExponentialML/Video-BLIP2-Preprocessor
+# 'video_json': a video foler and a json caption file
+# 'single_video': A single video file.mp4 and text prompt
+dataset_types: 
+  #- 'single_video'
+  #- 'folder'
+  #- 'image'
+  - 'video_blip'
+  #- 'video_json'
+
+# Adds offset noise to training. See https://www.crosslabs.org/blog/diffusion-with-offset-noise
+# If this is enabled, rescale_schedule will be disabled.
+offset_noise_strength: 0.1
+use_offset_noise: False
+
+# Uses schedule rescale, also known as the "better" offset noise. See https://arxiv.org/pdf/2305.08891.pdf
+# If this is enabled, offset noise will be disabled.
+rescale_schedule: False
+
+# When True, this extends all items in all enabled datasets to the highest length. 
+# For example, if you have 200 videos and 10 images, 10 images will be duplicated to the length of 200. 
+extend_dataset: False
+
+# Caches the latents (Frames-Image -> VAE -> Latent) to a HDD or SDD. 
+# The latents will be saved under your training folder, and loaded automatically for training.
+# This both saves memory and speeds up training and takes very little disk space.
+cache_latents: False
+
+# If you have cached latents set to `True` and have a directory of cached latents,
+# you can skip the caching process and load previously saved ones. 
+cached_latent_dir: null #/path/to/cached_latents
+
+# Train the text encoder for the model. LoRA Training overrides this setting.
+train_text_encoder: False
+
+# https://github.com/cloneofsimo/lora (NOT Compatible with webui extension)
+# This is the first, original implementation of LoRA by cloneofsimo.
+# Use this version if you want to maintain compatibility to the original version.
+
+# https://github.com/ExponentialML/Stable-LoRA/tree/main (Compatible with webui text2video extension)
+# This is an implementation based off of the original LoRA repository by Microsoft, and the default LoRA method here.
+# It works a different by using embeddings instead of the intermediate activations (Linear || Conv).
+# This means that there isn't an extra function when doing low ranking adaption.
+# It solely saves the weight differential between the initialized weights and updates. 
+
+# "cloneofsimo" or "stable_lora"
+lora_version: "cloneofsimo"
+
+# Use LoRA for the UNET model.
+use_unet_lora: False
+
+# Use LoRA for the Text Encoder. If this is set, the text encoder for the model will not be trained.
+use_text_lora: False
+
+# LoRA Dropout. This parameter adds the probability of randomly zeros out elements. Helps prevent overfitting.
+# See: https://pytorch.org/docs/stable/generated/torch.nn.Dropout.html
+lora_unet_dropout: 0.1
+
+lora_text_dropout: 0.1
+
+# https://github.com/kabachuha/sd-webui-text2video
+# This saves a LoRA that is compatible with the text2video webui extension.
+# It only works when the lora version is 'stable_lora'.
+# This is also a DIFFERENT implementation than Kohya's, so it will NOT work the same implementation.
+save_lora_for_webui: True
+
+# The LoRA file will be converted to a different format to be compatible with the webui extension.
+# The difference between this and 'save_lora_for_webui' is that you can continue training a Diffusers pipeline model
+# when this version is set to False
+only_lora_for_webui: False
+
+# Choose whether or not ito save the full pretrained model weights for both checkpoints and after training.
+# The only time you want this off is if you're doing full LoRA training.
+save_pretrained_model: True
+
+# The modules to use for LoRA. Different from 'trainable_modules'.
+unet_lora_modules:
+  - "UNet3DConditionModel"
+  #- "ResnetBlock2D"
+  #- "TransformerTemporalModel"
+  #- "Transformer2DModel"
+  #- "CrossAttention"
+  #- "Attention"
+  #- "GEGLU"
+  #- "TemporalConvLayer"
+
+# The modules to use for LoRA. Different from `trainable_text_modules`.
+text_encoder_lora_modules:
+  - "CLIPEncoderLayer"
+  #- "CLIPAttention"
+
+# The rank for LoRA training. With ModelScope, the maximum should be 1024. 
+# VRAM increases with higher rank, lower when decreased.
+lora_rank: 16
+
+# Learning rate for AdamW
+learning_rate: 5e-6
+
+# Weight decay. Higher = more regularization. Lower = closer to dataset.
+adam_weight_decay: 0
+
+# Optimizer parameters for the UNET. Overrides base learning rate parameters.
+extra_unet_params: null
+  #learning_rate: 1e-5
+  #adam_weight_decay: 1e-4
+
+# Optimizer parameters for the Text Encoder. Overrides base learning rate parameters.
+extra_text_encoder_params: null
+  #learning_rate: 1e-4
+  #adam_weight_decay: 0.2
+
+# How many batches to train. Not to be confused with video frames.
+train_batch_size: 6
+# Maximum number of train steps. Model is saved after training.
+max_train_steps: 500000
+
+# Saves a model every nth step.
+checkpointing_steps: 20000
+
+# How many steps to do for validation if sample_preview is enabled.
+validation_steps: 2000
+
+# Which modules we want to unfreeze for the UNET. Advanced usage.
+trainable_modules:
+  - "all"
+  # If you want to ignore temporal attention entirely, remove "attn1-2" and replace with ".attentions"
+  # This is for self attetion. Activates for spatial and temporal dimensions if n_sample_frames > 1
+  - "attn1"
+  #- ".attentions"
+  
+  # This is for cross attention (image & text data). Activates for spatial and temporal dimensions if n_sample_frames > 1
+  - "attn2"
+  - "conv_in"
+  
+  #  Convolution networks that hold temporal information. Activates for spatial and temporal dimensions if n_sample_frames > 1
+  - "temp_conv"
+  # - "motion"
+
+
+# Which modules we want to unfreeze for the Text Encoder. Advanced usage.
+trainable_text_modules: null
+
+# Seed for validation.
+seed: 6
+
+# Whether or not we want to use mixed precision with accelerate
+mixed_precision: "fp16"
+
+# This seems to be incompatible at the moment.
+use_8bit_adam: False 
+
+# Trades VRAM usage for speed. You lose roughly 20% of training speed, but save a lot of VRAM.
+# If you need to save more VRAM, it can also be enabled for the text encoder, but reduces speed x2.
+gradient_checkpointing: True
+text_encoder_gradient_checkpointing: False
+
+# Xformers must be installed for best memory savings and performance (< Pytorch 2.0)
+enable_xformers_memory_efficient_attention: False
+
+# Use scaled dot product attention (Only available with >= Torch 2.0)
+enable_torch_2_attn: True
