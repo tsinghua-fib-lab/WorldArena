@@ -142,23 +142,24 @@ models/
 ```
 cd action_planner
 ```
-
-1.  **Modify Shell Script:**：
-    *   File path：`./sripts/step1_prepare_latent_wan.sh`
+1.  **Edit Shell Script:**：
+    *   File path：`./sripts/step1_prepare_latent_wan.sh` `./sripts/generate_metadata.py`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
     *   Modify the variable `OUTPUT_DIR`， replacing its value with the directory path where you want to store **output files**.
 
-2.  **Modify Python Script**：
+2.  **Edit Python Script**：
     *   File path：`step1_prepare_latent_wan.py`
-    *   Modify the variable `ROOT`, replacing its value with **your dataset path**.
+    *   Modify the variable `ROOT`, replacing its value with **your dataset path**
 
 After completing the above path replacements, run the preprocessing script.
 
 ```bash
+python ./scripts/generate_metadata.py
 bash ./sripts/step1_prepare_latent_wan.sh
 ```
 
-Note: you can change the `allow_task` variable in `step1_prepare_latent_wan.py` to `adjust_bottle` or `click_bell` depending on the task you want to process. 
+Note: You can change the `allow_task` variable in `step1_prepare_latent_wan.py` to `adjust_bottle` or `click_bell` depending on the task you want to process. \
+Training script path:
 
 ```bash
 bash ./sripts/train_wan.sh
@@ -169,6 +170,8 @@ Evaluation script path:
 ```bash
 bash ./sripts/evaluate_wan_single.sh
 ```
+
+
 
 
 
