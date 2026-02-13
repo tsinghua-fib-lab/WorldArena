@@ -1,7 +1,7 @@
-
-## 1. Environment Configuration
+### 1. Environment Setup
 
 This module was developed and tested under **Python 3.10.19** with **cuda 12.8**. First, execute the following commands to create an environment named `worldarena_embodied` and activate it:
+
 ```bash
 conda create -n worldarena_embodied python=3.10.19 -y
 conda activate worldarena_embodied
@@ -26,16 +26,19 @@ cd action_planner
 pip install -r requirements.txt
 ```
 
-## 2. Training Weights
-We fine-tuned the [Wan2.2](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the Robotwin2.0 dataset. The trained video model weights and action planning part weights have been uploaded to Hugging Face:
-https://huggingface.co/WorldArena/WorldArena/tree/main/models \
-Need to download clip and place it under the ./models path \
-https://huggingface.co/openai/clip-vit-base-patch32 \
-Download Wan2.2 base model \
-https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B
+### 2. Download Model Weights
+
+As an example implementation, we fine-tune the [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the RoboTwin 2.0 dataset to conduct the action planning task.
+
+The fine-tuned video generation weights, together with the action planning module weights, are available at: https://huggingface.co/WorldArena/WorldArena/tree/main/models.
+
+Additionally, it requires the following files:
+- Download the [CLIP ViT-B/32](https://huggingface.co/openai/clip-vit-base-patch32) model and place it under the `./models` directory.
+- Download the original [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) checkpoint.
 
 
-Organization path is
+The file structure is:
+
 ```bash
 models/
 ├── wan_video/ 
@@ -49,13 +52,12 @@ models/
 ```
 
 
-## 3. Quick Start
-First, the model preprocesses the input data by running the preprocessing script.
+### 3. Quick Start
 
 1.  **Edit Shell Script:**：
     *   File path：`./sripts/step1_prepare_latent_wan.sh` `./sripts/generate_metadata.py`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
-    *   Modify the variable `OUTPUT_DIR`，replacing its value with the directory path where you want to store **output files**.
+    *   Modify the variable `OUTPUT_DIR`， replacing its value with the directory path where you want to store **output files**.
 
 2.  **Edit Python Script**：
     *   File path：`step1_prepare_latent_wan.py`
@@ -68,8 +70,9 @@ python ./scripts/generate_metadata.py
 bash ./sripts/step1_prepare_latent_wan.sh
 ```
 
-Note: Remember to change the `allow_task` variable in `step1_prepare_latent_wan.py` to `adjust_bottle` or `click_bell` depending on the task you want to process. \
+Note: You can change the `allow_task` variable in `step1_prepare_latent_wan.py` to `adjust_bottle` or `click_bell` depending on the task you want to process. \
 Training script path:
+
 ```bash
 bash ./sripts/train_wan.sh
 ```
