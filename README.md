@@ -139,16 +139,18 @@ models/
 
 ### 3. Quick Start
 
-First, the model preprocesses the input data by running the preprocessing script.
+```
+cd action_planner
+```
 
-1.  **Edit Shell Script:**：
+1.  **Modify Shell Script:**：
     *   File path：`./sripts/step1_prepare_latent_wan.sh`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
     *   Modify the variable `OUTPUT_DIR`， replacing its value with the directory path where you want to store **output files**.
 
-2.  **Edit Python Script**：
+2.  **Modify Python Script**：
     *   File path：`step1_prepare_latent_wan.py`
-    *   Modify the variable `ROOT`, replacing its value with **your dataset path**
+    *   Modify the variable `ROOT`, replacing its value with **your dataset path**.
 
 After completing the above path replacements, run the preprocessing script.
 
