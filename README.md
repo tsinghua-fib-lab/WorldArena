@@ -83,7 +83,8 @@ A typical task directory follows the structure below (example: `adjust_bottle/al
 
 </div>
 
-
+### Action Planning Task
+Please refer to [action planning](https://github.com/tsinghua-fib-lab/WorldArena/tree/main/action_planner) for implementation.
 
 ## 🏆 Leaderboard
 
