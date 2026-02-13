@@ -13,7 +13,7 @@
 </a>
 
 <a href="https://huggingface.co/spaces/WorldArena/WorldArena">
-  <img src="https://img.shields.io/badge/Leaderboard-HuggingFace-ffcc00?style=for-the-badge&logo=huggingface&logoColor=black">
+  <img src="https://img.shields.io/badge/Leaderboard-HuggingFace-ffcc00?style=for-the-badge&logo=huggingface&logoColor=ffcc00">
 </a>
 
 </div>
@@ -63,8 +63,11 @@ Coming soon.
 
 ## Leaderboard
 
-The official WorldArena leaderboard is hosted on HuggingFace: <a href="https://huggingface.co/spaces/WorldArena/WorldArena"><img src="https://img.shields.io/badge/Leaderboard-HuggingFace-ffcc00?style=flat&logo=huggingface&logoColor=black"></a>. 
-It provides standardized evaluation results across video perception quality, embodied task functionality, and the unified EWMScore. We welcome community submissions to benchmark new embodied world models under a fair and reproducible protocol. Join us in advancing truly functional world models for embodied AI.
+The official WorldArena leaderboard is hosted on Hugging Face: 
+<a href="https://huggingface.co/spaces/WorldArena/WorldArena">
+  <img src="https://img.shields.io/badge/Leaderboard-HuggingFace-2D2D2D?style=flat&logo=huggingface&logoColor=ffcc00">
+</a>. It provides standardized evaluation results across video perception quality, embodied task functionality, and the unified EWMScore. We welcome community submissions to benchmark new embodied world models under a fair and reproducible protocol. Join us in advancing truly functional world models for embodied AI.
+
 
 
 
