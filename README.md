@@ -45,7 +45,27 @@ WorldArena is a unified benchmark designed to systematically evaluate embodied w
 
 
 ## 📦 Dataset
-Coming soon.
+
+This project uses a subset of the **RoboTwin 2.0** dataset. RoboTwin 2.0 is a simulation framework and benchmark for **bimanual robotic manipulation**, providing expert trajectories across a diverse set of manipulation tasks and supporting structured domain randomization for robust evaluation.
+
+### Subset used in this project
+- **50 tasks** (Clean-50 setting)
+- **50 episodes per task**
+- **Train/Test split (per task):** **40** episodes for training, **10** episodes for testing
+- **Robot embodiment:** **Aloha-AgileX** (as indicated by `aloha-agilex_clean_50`)
+
+### Data organization (per task)
+A typical task directory follows the structure below (example: `adjust_bottle/aloha-agilex_clean_50/aloha-agilex_clean_50/`):
+
+- `actions/` — low-level action sequences
+- `video/` — episode videos
+- `states/` — robot states / per-timestep metadata
+- `instructions/` (+ optional `instructions_1`, `instructions_2`) — natural language task instructions / variants
+
+### Links
+- Official website & documentation: https://robotwin-platform.github.io/  
+- Official repository: https://github.com/RoboTwin-Platform/RoboTwin  
+- Dataset release (Hugging Face): https://huggingface.co/datasets/TianxingChen/RoboTwin2.0
 
 
 ## 🎬 Video Quality Evaluation
