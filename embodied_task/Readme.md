@@ -22,7 +22,7 @@ pip install flash-attn==2.8.3 --no-build-isolation
 Finally, install the remaining dependencies (such as Transformers, OpenCV, etc.):
 
 ```bash
-cd action_planner
+cd embodied_task
 pip install -r requirements.txt
 ```
 
