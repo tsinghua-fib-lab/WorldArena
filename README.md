@@ -107,7 +107,7 @@ pip install flash-attn==2.8.3 --no-build-isolation
 Finally, install the remaining dependencies (such as Transformers, OpenCV, etc.):
 
 ```bash
-cd embodied_task
+cd action_planner
 pip install -r requirements.txt
 ```
 
@@ -139,9 +139,6 @@ models/
 
 ### 3. Quick Start
 
-```
-cd action_planner
-```
 1.  **Edit Shell Script:**：
     *   File path：`./sripts/step1_prepare_latent_wan.sh` `./sripts/generate_metadata.py`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
