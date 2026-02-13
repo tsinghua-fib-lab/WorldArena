@@ -113,7 +113,7 @@ pip install -r requirements.txt
 
 ### 2. Download Model Weights
 
-As a reference implementation, we fine-tune the [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the RoboTwin 2.0 dataset to conduct the action planning task.
+As an example implementation, we fine-tune the [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the RoboTwin 2.0 dataset to conduct the action planning task.
 
 The fine-tuned video generation weights, together with the action planning module weights, are available at: https://huggingface.co/WorldArena/WorldArena/tree/main/models.
 
