@@ -83,7 +83,7 @@ A typical task directory follows the structure below (example: `adjust_bottle/al
 
 </div>
 
-### 1. Environment Configuration
+### 1. Environment Setup
 
 This module was developed and tested under **Python 3.10.19** with **cuda 12.8**. First, execute the following commands to create an environment named `worldarena_embodied` and activate it:
 
@@ -111,7 +111,7 @@ cd embodied_task
 pip install -r requirements.txt
 ```
 
-### 2. Training Weights
+### 2. Download Model Weights
 
 As a reference implementation, we fine-tune the [Wan2.2-TI2V-5B](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the RoboTwin 2.0 dataset to conduct the action planning task.
 
