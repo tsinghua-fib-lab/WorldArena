@@ -35,7 +35,7 @@ Download Wan2.2 base model \
 https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B
 
 
-Organization path is
+The file structure is:
 ```bash
 models/
 ├── wan_video/ 
@@ -55,7 +55,7 @@ First, the model preprocesses the input data by running the preprocessing script
 1.  **Edit Shell Script:**：
     *   File path：`./sripts/step1_prepare_latent_wan.sh` `./sripts/generate_metadata.py`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
-    *   Modify the variable `OUTPUT_DIR`，replacing its value with the directory path where you want to store **output files**.
+    *   Modify the variable `OUTPUT_DIR`， replacing its value with the directory path where you want to store **output files**.
 
 2.  **Edit Python Script**：
     *   File path：`step1_prepare_latent_wan.py`
