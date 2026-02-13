@@ -27,12 +27,9 @@ pip install -r requirements.txt
 ```
 
 ## 2. Training Weights
-We fine-tuned the [Wan2.2](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the Robotwin2.0 dataset. The trained video model weights and action planning part weights have been uploaded to Hugging Face:
-https://huggingface.co/WorldArena/WorldArena/tree/main/models \
-Need to download clip and place it under the ./models path \
-https://huggingface.co/openai/clip-vit-base-patch32 \
-Download Wan2.2 base model \
-https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B
+We fine-tuned the [Wan2.2](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) model on the Robotwin2.0 dataset. The trained video model weights and action planning part weights have been uploaded to HuggingFace: https://huggingface.co/WorldArena/WorldArena/tree/main/models \
+Download the [CLIP model](https://huggingface.co/openai/clip-vit-base-patch32) and place it under the ./models \
+Download the [Wan2.2 model](https://huggingface.co/Wan-AI/Wan2.2-TI2V-5B) and place it under the ./models
 
 
 The file structure is:
@@ -52,14 +49,14 @@ models/
 ## 3. Action Planning Task 
 First, the model preprocesses the input data by running the preprocessing script.
 
-1.  **Edit Shell Script:**：
+1.  **Modify Shell Script:**
     *   File path：`./sripts/step1_prepare_latent_wan.sh` `./sripts/generate_metadata.py`
     *   Modify the variable `DATASET_PATH`, replacing its value with **your dataset path**.
     *   Modify the variable `OUTPUT_DIR`， replacing its value with the directory path where you want to store **output files**.
 
-2.  **Edit Python Script**：
+2.  **Modify Python Script:**
     *   File path：`step1_prepare_latent_wan.py`
-    *   Modify the variable `ROOT`, replacing its value with **your dataset path**
+    *   Modify the variable `ROOT`, replacing its value with **your dataset path**.
 
 After completing the above path replacements, run the preprocessing script.
 
