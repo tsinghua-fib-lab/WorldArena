@@ -1,0 +1,18 @@
+defaults:
+  - /callbacks/rollout/tasks@tasks: new_playtable_tasks
+  - /annotations@val_annotations: new_playtable_validation
+_target_: policy_models.rollout.rollout_long_horizon.RolloutLongHorizon
+_recursive_: false
+env_cfg:
+  _target_: policy_models.wrappers.hulc_wrapper.HulcWrapper
+skip_epochs: ${rollout_lh_skip_epochs}
+rollout_freq: 5
+num_videos: 0
+num_sequences: 1000 # 128
+replan_freq: 30
+ep_len: 360
+empty_cache: false
+log_video_to_file: False
+save_dir: ./videos
+lang_folder: ${lang_folder} # ${datamodule.datasets.lang_dataset.lang_folder}
+debug: false
