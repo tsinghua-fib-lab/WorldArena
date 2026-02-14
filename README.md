@@ -75,6 +75,8 @@ A typical task directory follows the structure below (example: `adjust_bottle/al
 
 </div>
 
+Please refer to [video quality metrics](https://github.com/tsinghua-fib-lab/WorldArena/blob/main/video_quality) for implementation.
+
 ## 🤖 Embodied Task Evaluation
 
 <div align="center">
