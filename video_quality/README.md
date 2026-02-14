@@ -1,6 +1,5 @@
-## WorldArena Video Quality Evaluation Environment and Usage Guide
+## WorldArena Video Quality Evaluation Guidelines
 
-Scope: standard metrics, VLM interaction quality/perspectivity/instruction following, JEPA similarity.
 Environment split: `WorldArena` (base/action following), `WorldArena_VLM` (VLM evaluation), `WorldArena_JEPA` (JEPA similarity).
 
 ### 1. Prerequisites
