@@ -1,0 +1,75 @@
+# pip-requirements (curated for WorldArena video_quality; CUDA 12.8 stack)
+
+# Core torch stack
+torch==2.10.0
+torchvision==0.25.0
+torchaudio==2.10.0
+torchmetrics==1.7.1
+xformers==0.0.35.dev1120
+triton==3.6.0
+
+# Transformers / generation
+transformers==4.51.0
+accelerate==1.1.0
+sentencepiece==0.2.1
+tokenizers==0.21.2
+openai-clip==1.0.1
+
+# Video & media IO
+decord==0.6.0
+av==13.1.0
+opencv-python==4.10.0.84
+opencv-python-headless==4.11.0.86
+
+# Vision / IQA / models
+pyiqa==0.1.14.1
+timm==1.0.24
+Pillow==11.3.0
+numpy==2.2.6
+einops==0.8.1
+fastdtw==0.3.4
+fairscale==0.4.13
+
+# Detection / segmentation (used in processing, SAM3, RAFT, etc.)
+mmcv==2.2.0
+mmcv-lite==2.2.0
+mmdet==3.3.0
+mmengine==0.10.7
+pycocotools==2.0.10
+fvcore==0.1.5.post20221221
+yacs==0.1.8
+iopath==0.1.10
+shapely==2.1.2
+lap==0.5.12
+ultralytics==8.3.236
+segment_anything==1.0
+sam3==0.1.0
+
+# Depth / geometry (for depth-anything style checkpoints)
+scikit-image==0.25.2
+scipy==1.15.3
+PyWavelets==1.8.0
+
+# Data / utils
+omegaconf==2.3.0
+easydict==1.13
+json_repair==0.44.1
+PyYAML==6.0.3
+tqdm==4.67.3
+requests==2.32.5
+packaging==26.0
+filelock==3.21.2
+setuptools==75.6.0
+
+# Logging / misc
+rich==14.2.0
+tabulate==0.9.0
+psutil==7.1.3
+
+# Optional: if running notebooks or preprocessing scripts that rely on these
+matplotlib==3.10.7
+pandas==2.3.3
+scikit-learn==1.7.2
+
+# Keep below commented unless you need the full MMCV extras or movie processing
+# moviepy==2.2.1

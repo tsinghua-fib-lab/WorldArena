@@ -1,0 +1,65 @@
+### Slim PhyGenBench / VLM requirements
+# Use for Interaction_Quality / Perspectivity / Instruction_Following judge.
+# If you need the exact env, install requirements_phygenbench_full.txt (pip freeze snapshot).
+
+# Core compute (CUDA 12.8 wheels we shipped)
+torch==2.9.1
+torchvision==0.24.1
+torchaudio==2.9.1
+triton==3.5.1
+# Optional: flash-attn prebuilt wheel (GPU only). Comment out if build fails.
+# flash_attn @ file://your absolute path
+
+# Model + tokenizer
+autoawq @ git+https://github.com/casper-hansen/AutoAWQ.git@v0.2.7
+transformers==4.51.0
+sentencepiece==0.2.1
+qwen-vl-utils==0.0.14
+huggingface_hub==1.3.1
+safetensors==0.7.0
+
+# Video / image IO and VFI-related deps
+decord==0.6.0
+opencv-python==4.11.0.86
+opencv-python-headless==4.11.0.86
+imageio==2.31.1
+imageio-ffmpeg==0.6.0
+moviepy==1.0.3
+# VFIMamba stack
+mamba-ssm==2.2.2
+mamba-ssm-ops==0.2.2
+einops==0.8.1
+einops-exts==0.0.4
+
+# Metrics + helpers
+ftfy==6.3.1
+open_clip_torch==3.2.0
+pycocotools==2.0.11
+scikit-learn==1.7.2
+scipy==1.15.3
+pandas==2.3.3
+numpy==1.26.4
+tqdm==4.67.1
+
+# Distributed / acceleration (optional)
+accelerate==1.12.0
+bitsandbytes==0.49.0
+# deepspeed==0.18.3  # uncomment if you need it
+
+# Logging and misc
+gdown==5.2.0
+requests==2.32.5
+omegaconf==2.3.0
+python-dotenv==1.2.1
+fsspec==2025.10.0
+
+# Dev / testing (optional)
+pytest==7.2.0
+ipywidgets>=8.1.5
+
+# Local wheels / editable installs we used (enable if you need exact behavior)
+# dropout_layer_norm @ file://your absolute path
+# t2v_metrics @ git+https://github.com/linzhiqiu/t2v_metrics@0bd9bfc68032ce4f9d5da80d646fa5ceb3b9bb1b
+# llava @ git+https://github.com/LLaVA-VL/LLaVA-NeXT.git@e9835311c6f515a13702eb7a7750fcd936f65ed8
+# clip @ git+https://github.com/openai/CLIP.git@dcba3cb2e2827b402d2701e7e1c7d9fed8a20ef1
+# pytorchvideo @ git+https://github.com/linzhiqiu/pytorchvideo.git@6cdc929315aab1b5674b6dcf73b16ec99147735f

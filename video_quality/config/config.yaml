@@ -1,0 +1,70 @@
+# === Configuration File Guide ===
+model_name: test
+data:
+  gt_path: "your absolute path"/WorldArena/video_quality/data/gt_dataset
+  val_base: "your absolute path"/WorldArena/video_quality/data/generated_dataset
+data_action_following:
+  gt_path: "your absolute path"/WorldArena/video_quality/data_action_following/gt_dataset
+  val_base: "your absolute path"/WorldArena/video_quality/data_action_following/generated_dataset
+save_path: "your absolute path"/WorldArena/video_quality/output
+save_path_action_following: "your absolute path"/WorldArena/video_quality/output_action_following
+ckpt:
+  action_following: "your absolute path"/models/ViT-B-32.pt
+  semantic_alignment:
+    caption: "your absolute path"/models/Qwen2.5-VL-7B-Instruct
+    CLIP: "your absolute path"/models/clip-vit-base-patch16
+  depth_accuracy: "your absolute path"/depth-anything
+  aesthetic_quality:
+    clip: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/clip_model/ViT-L-14.pt
+    aesthetic_head: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/aesthetic_model/emb_reader/sa_0_4_vit_l_14_linear.pth
+  background_consistency:
+    clip: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/clip_model/ViT-B-32.pt
+    raft: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth
+  dynamic_degree:
+    raft: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth
+  flow_score:
+    raft: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth
+  photometric_smoothness:
+    cfg: "your absolute path"/WorldArena/video_quality/WorldArena/third_party/SEA-RAFT/config/eval/spring-M.json
+    model: "your absolute path"/WorldArena/video_quality/WorldArena/third_party/checkpoints/Tartan-C-T-TSKH-spring540x960-M.pth
+  motion_smoothness:
+    model: "your absolute path"/WorldArena/video_quality/WorldArena/third_party/checkpoints/VFIMamba.pkl
+  image_quality:
+    musiq: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/pyiqa_model/musiq_spaq_ckpt-358bb6af.pth
+  subject_consistency:
+    repo: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/dino_model/facebookresearch_dino_main
+    weight: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/dino_model/dino_vitbase16_pretrain.pth
+    model: dino_vitb16
+    raft: "your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth
+  sam3_model_ckpt: "your absolute path"/models/sam
+  vlm_model: "your absolute path"/models/qwenvl3
+
+# - `action_following`: ["your absolute path"/models/ViT-B-32.pt](https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt)
+# - `semantic_alignment`:
+#     - `caption`: ["your absolute path"/models/Qwen2.5-VL-7B-Instruct](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct)
+#     - `CLIP`: ["your absolute path"/models/clip-vit-base-patch16](https://huggingface.co/openai/clip-vit-base-patch16)
+# - `depth_accuracy`: ["your absolute path"/depth-anything](https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf)
+# - `aesthetic_quality`:
+#     - `clip`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/clip_model/ViT-L-14.pt](https://huggingface.co/jinaai/clip-models/blob/main/ViT-L-14.pt)
+#     - `aesthetic_head`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/aesthetic_model/emb_reader/sa_0_4_vit_l_14_linear.pth]("https://github.com/LAION-AI/aesthetic-predictor/blob/main/sa_0_4_vit_l_14_linear.pth?raw=true")
+# - `background_consistency`:
+#     - `clip`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/clip_model/ViT-B-32.pt](https://huggingface.co/jinaai/clip-models/blob/main/ViT-B-32.pt)
+#     - `raft`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth](https://huggingface.co/RaphaelLiu/EvalCrafter-Models/tree/main/RAFT/models)
+# - `dynamic_degree`:
+#     - `raft`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth](https://huggingface.co/RaphaelLiu/EvalCrafter-Models/tree/main/RAFT/models)
+# - `flow_score`:
+#     - `raft`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth](https://huggingface.co/RaphaelLiu/EvalCrafter-Models/tree/main/RAFT/models)
+# - `photometric_smoothness`:
+#     - `cfg`: "your absolute path"/WorldArena/video_quality/WorldArena/third_party/SEA-RAFT/config/eval/spring-M.json (already included locally)
+#     - `model`: ["your absolute path"/WorldArena/video_quality/WorldArena/third_party/checkpoints/Tartan-C-T-TSKH-spring540x960-M.pth](https://huggingface.co/MemorySlices/Tartan-C-T-TSKH-spring540x960-M/blob/main/model.safetensors)
+# - `motion_smoothness`:
+#     - `model`: ["your absolute path"/WorldArena/video_quality/WorldArena/third_party/checkpoints/VFIMamba.pkl](https://huggingface.co/MCG-NJU/VFIMamba/blob/main/model.pkl)
+# - `image_quality`:
+#     - `musiq`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/pyiqa_model/musiq_spaq_ckpt-358bb6af.pth](https://huggingface.co/chaofengc/IQA-PyTorch-Weights/blob/main/musiq_spaq_ckpt-358bb6af.pth)
+# - `subject_consistency`:
+#     - `repo`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/dino_model/facebookresearch_dino_main](https://github.com/facebookresearch/dino)
+#     - `weight`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/dino_model/dino_vitbase16_pretrain.pth](https://huggingface.co/Xiaomabufei/lumos/blob/main/dino_vitbase16_pretrain.pth)
+#     - `model`: dino_vitb16
+#     - `raft`: ["your absolute path"/WorldArena/video_quality/WorldArena/vbench_cache/raft_model/models/raft-things.pth](https://huggingface.co/RaphaelLiu/EvalCrafter-Models/tree/main/RAFT/models)
+# - `sam3_model_ckpt`: ["your absolute path"/models/sam](https://huggingface.co/facebook/sam3/tree/main) (Note: download [bpe_simple_vocab_16e6.txt.gz](https://huggingface.co/OpenGVLab/ViCLIP-B-16-hf/blob/main/bpe_simple_vocab_16e6.txt.gz) into this sam folder.)
+# - `vlm_model`: ["your absolute path"/models/qwenvl3](https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct)
