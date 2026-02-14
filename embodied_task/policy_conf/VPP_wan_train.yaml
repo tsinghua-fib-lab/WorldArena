@@ -1,0 +1,122 @@
+defaults:
+  - datamodule: calvin
+
+root_data_dir: "your_data_path"
+lang_folder: lang_clip_resnet50
+clip_lang_model_name: ViT-B/32
+
+log_dir: ./logs/wow_vpp
+slurm: false
+min_window_size: 21 # 21
+max_window_size: 50
+future_range: 29
+seed: 242
+device: 'cuda'
+batch_size: 20
+devices: 1
+goal_window_size: 1
+multistep: 45 #${act_seq_len}
+p_last_state: 0
+max_epochs: 200
+log_every: 50
+rollout_lh_skip_epochs: 290
+window_sampling_strategy: 'geometric'
+num_workers: 80
+img_gen_frame_diff: 3
+benchmark_name: calvin_abcd # calvin_abcd
+use_ckpt_path : False
+ckpt_path: 
+act_seq_len: 45
+obs_seq_len: 1
+out_dir: ./wan_output
+
+
+model:
+  _target_: policy_models.VPP_policy.VPP_Policy
+  
+  # 
+  video_model: 'vpp_vidar'
+  base_model_folder: ./models/Wan2.2-TI2V-5B # ckpt_dir
+  custom_dit_path: ./models/wan_video/wan_video.pt #pt_dir
+  use_clip: False
+  
+  _recursive_: false
+  latent_dim: 384 # 
+  multistep: 45
+  sampler_type: 'ddim'
+  num_sampling_steps: 10
+  sigma_data: 0.5
+  sigma_min: 0.001
+  sigma_max: 80
+  noise_scheduler: 'exponential'
+  sigma_sample_density_type: 'loglogistic'
+  use_lr_scheduler: true
+  act_window_size: 45 # 
+  obs_seq_len: ${obs_seq_len}
+  action_dim: 14
+  action_seq_len: ${act_seq_len}
+  use_text_not_embedding: True
+  seed: ${seed}
+  Former_depth: 6
+  Former_heads: 8
+  Former_dim_head: 64
+  Former_num_time_embeds: 12 # Former_num_time_embeds 
+  num_latents: 228 # 
+  pretrained_model_path: /cephfs/shared/gyj/ckpt/svd_calvin_2camera_2/checkpoint-100000
+  text_encoder_path: /cephfs/shared/llm/clip-vit-base-patch32
+  use_position_encoding: False # # should be same with finetune settings
+  use_Former: 3d
+  timestep: 20
+  use_all_layer: True
+  extract_layer_idx: 1
+  optimizer:
+    _target_: torch.optim.AdamW
+    transformer_weight_decay: 0.05
+    obs_encoder_weight_decay: 0.05
+    learning_rate: 1e-4
+    betas: [ 0.9, 0.9 ]
+  lr_scheduler:
+    lr_scheduler:
+      init_lr: 1e-4  # This is the peak or maximum learning rate
+      init_lr_scale: 0.1  # This is the ratio of initial learning rate to peak learning rate
+      final_lr_scale: 1e-6  # This is the ratio of final learning rate to peak learning rate
+      total_steps: 50000  # Example total steps, adjust as needed
+      phase_ratio: "(0.02, 0.08, 0.9)"
+      lr: 1e-4
+
+trainer:
+  gpus: ${devices}
+  precision: 'bf16'
+  max_epochs: ${max_epochs}
+  sync_batchnorm: false
+  accelerator: auto
+  limit_train_batches: 40000 
+  limit_val_batches: 4
+
+logger:
+  _target_: pytorch_lightning.loggers.WandbLogger
+  save_dir: .
+  name: logger
+  group: models
+  log_model: false
+  project: ${benchmark_name} # calvin_vision
+  #entity: bennoq
+  id: ???
+
+
+hydra:
+  run:
+    dir: ${log_dir}/runs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  sweep:
+    dir: ${log_dir}/runs/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.override_dirname}
+  job:
+    config:
+      override_dirname:
+        exclude_keys:
+          - log_dir
+          - datamodule.root_data_dir
+          - trainer.gpus
+          - datamodule.num_workers
+          - trainer.limit_train_batches
+          - trainer.limit_val_batches
