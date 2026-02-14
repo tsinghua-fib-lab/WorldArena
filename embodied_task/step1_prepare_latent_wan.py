@@ -11,9 +11,11 @@ import pandas as pd
 import torch
 from PIL import Image
 from torchvision.transforms import v2
+
 from wan.configs import MAX_AREA_CONFIGS
 
 ROOT = "The absolute path to your dataset."
+
 
 class TextVideoDataset(torch.utils.data.Dataset):
     def __init__(
@@ -147,20 +149,6 @@ class TextVideoDataset(torch.utils.data.Dataset):
             return frames
 
     def load_video(self, file_path, start_frame_id, num_frames):
-        """
-        加载从 start_frame_id 开始的连续 num_frames 帧。
-
-        Args:
-            file_path (str): 视频文件路径
-            start_frame_id (int): 起始帧索引（0-based）
-            num_frames (int): 要加载的帧数
-
-        Returns:
-            - 如果 self.is_i2v: (frames, first_frame)
-            - 否则: frames
-
-            其中 frames 是 List[Tensor]（已处理），first_frame 是 numpy array
-        """
         return self.load_frames_using_imageio(
             file_path=file_path,
             start_frame_id=start_frame_id,
@@ -225,16 +213,13 @@ def pad_tensor_to_fixed_size(tensor, target_size=(30, 4096)):
     target_len = target_size[0]  #
     target_dim = target_size[1]  #
 
-    
     dtype = tensor.dtype
     device = tensor.device
 
-    
     if current_len < target_len:
         padding = target_len - current_len
-        
-        tensor = F.pad(tensor, (0, 0, 0, padding), value=tensor.new_zeros(1).item())  #
 
+        tensor = F.pad(tensor, (0, 0, 0, padding), value=tensor.new_zeros(1).item())  #
 
     elif current_len > target_len:
         tensor = tensor[:target_len]
@@ -255,7 +240,9 @@ class TensorDataset(torch.utils.data.Dataset):
         """
         self.dataset_path = Path(dataset_path)
         tensor_paths = []
-        self.allow_task = ["adjust_bottle"]  # ,"click_bell" "adjust_bottle" in step2 choose task
+        self.allow_task = [
+            "adjust_bottle"
+        ]  # ,"click_bell" "adjust_bottle" in step2 choose task
         for task_dir in self.dataset_path.iterdir():
             if not task_dir.is_dir():
                 continue

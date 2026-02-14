@@ -7,21 +7,16 @@ import pytorch_lightning as pl
 from diffusers import StableVideoDiffusionPipeline
 from einops import rearrange, repeat
 from omegaconf import DictConfig, OmegaConf
+from pytorch_lightning.utilities import rank_zero_only
+from torch import einsum, nn
+from transformers import AutoTokenizer, CLIPTextModelWithProjection
+
 from policy_models.edm_diffusion.gc_sampling import *
 from policy_models.edm_diffusion.score_wrappers import GCDenoiser
 from policy_models.module.clip_lang_encoder import LangClip
 from policy_models.module.diffusion_extract import Diffusion_feature_extractor
-from policy_models.module.diffusion_extract_cogvideo import DiTFeatureExtractorCogVideo
-from policy_models.module.diffusion_extract_vidar import DiTFeatureExtractorVidar
-from policy_models.module.diffusion_extract_wow import (
-    DiTFeatureExtractorWoW,
-    LightningModelForDataProcess,
-)
 from policy_models.module.Video_Former import Video_Former_2D, Video_Former_3D
 from policy_models.utils.lr_schedulers.tri_stage_scheduler import TriStageLRScheduler
-from pytorch_lightning.utilities import rank_zero_only
-from torch import einsum, nn
-from transformers import AutoTokenizer, CLIPTextModelWithProjection
 
 # from policy_models.module.diffusion_extract_vidar import DiTFeatureExtractorVidar
 
@@ -237,6 +232,11 @@ class VPP_Policy(pl.LightningModule):
                 position_encoding=self.use_position_encoding,
             )
         elif self.video_model == "vpp_wow":
+            from policy_models.module.diffusion_extract_wow import (
+                DiTFeatureExtractorWoW,
+                LightningModelForDataProcess,
+            )
+
             self.TVP_encoder = DiTFeatureExtractorWoW(
                 base_model_folder=base_model_folder,
                 custom_dit_path=custom_dit_path,  #
@@ -261,6 +261,10 @@ class VPP_Policy(pl.LightningModule):
                     param.requires_grad = False
 
         elif self.video_model == "vpp_vidar":
+            from policy_models.module.diffusion_extract_vidar import (
+                DiTFeatureExtractorVidar,
+            )
+
             self.TVP_encoder = DiTFeatureExtractorVidar(
                 ckpt_dir=base_model_folder,
                 pt_dir=custom_dit_path,  #

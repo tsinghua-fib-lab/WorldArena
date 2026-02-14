@@ -4,91 +4,81 @@ import binascii
 import logging
 import os
 import os.path as osp
-
-import os
-import os.path as osp
-import tempfile
 import shutil
-import logging
+import tempfile
+
+import imageio
 import torch
 import torchvision
-import imageio
+
+__all__ = ["save_video", "save_image", "str2bool", "safe_save_video"]
 
 
-__all__ = ['save_video', 'save_image', 'str2bool','safe_save_video']
-
-
-def rand_name(length=8, suffix=''):
-    name = binascii.b2a_hex(os.urandom(length)).decode('utf-8')
+def rand_name(length=8, suffix=""):
+    name = binascii.b2a_hex(os.urandom(length)).decode("utf-8")
     if suffix:
-        if not suffix.startswith('.'):
-            suffix = '.' + suffix
+        if not suffix.startswith("."):
+            suffix = "." + suffix
         name += suffix
     return name
 
 
-def safe_save_video(tensor,
-                    save_file=None,
-                    fps=30,
-                    suffix='.mp4',
-                    nrow=8,
-                    normalize=True,
-                    value_range=(-1, 1)):
-    """
-    安全保存视频：当 save_file 指定为网络路径（如 Manifold）时，
-    先将视频写入本地 /tmp 临时文件，再拷贝到目标位置，避免 FFmpeg 写入失败。
-    
-    接口与 save_video 完全一致。
-    """
+def safe_save_video(
+    tensor,
+    save_file=None,
+    fps=30,
+    suffix=".mp4",
+    nrow=8,
+    normalize=True,
+    value_range=(-1, 1),
+):
     if save_file is None:
-        # 行为与原函数一致：直接写入 /tmp
-        cache_file = osp.join('/tmp', rand_name(suffix=suffix))
-        _write_video_to_path(
-            tensor, cache_file, fps, nrow, normalize, value_range
-        )
+        #
+        cache_file = osp.join("/tmp", rand_name(suffix=suffix))
+        _write_video_to_path(tensor, cache_file, fps, nrow, normalize, value_range)
         return
 
-    # === 关键：先写 tmp，再 copy 到 save_file ===
+    #
     try:
-        # 创建临时文件（在本地高速盘）
+        #
         with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
             tmp_path = tmp.name
 
-        # 写入临时文件（本地，安全）
-        _write_video_to_path(
-            tensor, tmp_path, fps, nrow, normalize, value_range
-        )
+        #
+        _write_video_to_path(tensor, tmp_path, fps, nrow, normalize, value_range)
 
-        # 确保目标目录存在
+        #
         os.makedirs(osp.dirname(save_file), exist_ok=True)
 
-        # 拷贝到最终位置（如 Manifold）
+        #
         shutil.copy(tmp_path, save_file)
         logging.info(f"Video safely saved to {save_file}")
 
     except Exception as e:
         logging.error(f"safe_save_video failed for {save_file}: {e}")
-        raise  # 或改为 pass，根据你的容错策略
+        raise  #
     finally:
-        # 清理临时文件
-        if 'tmp_path' in locals() and osp.exists(tmp_path):
+        #
+        if "tmp_path" in locals() and osp.exists(tmp_path):
             os.unlink(tmp_path)
 
 
 def _write_video_to_path(tensor, path, fps, nrow, normalize, value_range):
-    """内部工具函数：将 tensor 写入指定本地路径"""
     # Preprocess
     tensor = tensor.clamp(min(value_range), max(value_range))
-    tensor = torch.stack([
-        torchvision.utils.make_grid(
-            u, nrow=nrow, normalize=normalize, value_range=value_range
-        )
-        for u in tensor.unbind(2)
-    ], dim=1).permute(1, 2, 3, 0)  # [T, H, W, C]
+    tensor = torch.stack(
+        [
+            torchvision.utils.make_grid(
+                u, nrow=nrow, normalize=normalize, value_range=value_range
+            )
+            for u in tensor.unbind(2)
+        ],
+        dim=1,
+    ).permute(1, 2, 3, 0)  # [T, H, W, C]
     tensor = (tensor * 255).clamp(0, 255).type(torch.uint8).cpu()
 
     # Write with imageio
-    writer = imageio.get_writer(path, fps=fps, codec='libx264', quality=8)
+    writer = imageio.get_writer(path, fps=fps, codec="libx264", quality=8)
     try:
         for frame in tensor.numpy():
             writer.append_data(frame)
@@ -96,64 +86,59 @@ def _write_video_to_path(tensor, path, fps, nrow, normalize, value_range):
         writer.close()
 
 
-
-
-
-
-
-def save_video(tensor,
-               save_file=None,
-               fps=30,
-               suffix='.mp4',
-               nrow=8,
-               normalize=True,
-               value_range=(-1, 1)):
+def save_video(
+    tensor,
+    save_file=None,
+    fps=30,
+    suffix=".mp4",
+    nrow=8,
+    normalize=True,
+    value_range=(-1, 1),
+):
     # cache file
-    cache_file = osp.join('/tmp', rand_name(
-        suffix=suffix)) if save_file is None else save_file
+    cache_file = (
+        osp.join("/tmp", rand_name(suffix=suffix)) if save_file is None else save_file
+    )
 
     # save to cache
     try:
         # preprocess
         tensor = tensor.clamp(min(value_range), max(value_range))
-        tensor = torch.stack([
-            torchvision.utils.make_grid(
-                u, nrow=nrow, normalize=normalize, value_range=value_range)
-            for u in tensor.unbind(2)
-        ],
-                             dim=1).permute(1, 2, 3, 0)
+        tensor = torch.stack(
+            [
+                torchvision.utils.make_grid(
+                    u, nrow=nrow, normalize=normalize, value_range=value_range
+                )
+                for u in tensor.unbind(2)
+            ],
+            dim=1,
+        ).permute(1, 2, 3, 0)
         tensor = (tensor * 255).type(torch.uint8).cpu()
 
         # write video
-        writer = imageio.get_writer(
-            cache_file, fps=fps, codec='libx264', quality=8)
+        writer = imageio.get_writer(cache_file, fps=fps, codec="libx264", quality=8)
         for frame in tensor.numpy():
             writer.append_data(frame)
         writer.close()
     except Exception as e:
-        logging.info(f'save_video failed, error: {e}')
+        logging.info(f"save_video failed, error: {e}")
 
 
 def save_image(tensor, save_file, nrow=8, normalize=True, value_range=(-1, 1)):
     # cache file
     suffix = osp.splitext(save_file)[1]
-    if suffix.lower() not in [
-            '.jpg', '.jpeg', '.png', '.tiff', '.gif', '.webp'
-    ]:
-        suffix = '.png'
+    if suffix.lower() not in [".jpg", ".jpeg", ".png", ".tiff", ".gif", ".webp"]:
+        suffix = ".png"
 
     # save to cache
     try:
         tensor = tensor.clamp(min(value_range), max(value_range))
         torchvision.utils.save_image(
-            tensor,
-            save_file,
-            nrow=nrow,
-            normalize=normalize,
-            value_range=value_range)
+            tensor, save_file, nrow=nrow, normalize=normalize, value_range=value_range
+        )
         return save_file
     except Exception as e:
-        logging.info(f'save_image failed, error: {e}')
+        logging.info(f"save_image failed, error: {e}")
 
 
 def str2bool(v):
@@ -175,12 +160,12 @@ def str2bool(v):
     if isinstance(v, bool):
         return v
     v_lower = v.lower()
-    if v_lower in ('yes', 'true', 't', 'y', '1'):
+    if v_lower in ("yes", "true", "t", "y", "1"):
         return True
-    elif v_lower in ('no', 'false', 'f', 'n', '0'):
+    elif v_lower in ("no", "false", "f", "n", "0"):
         return False
     else:
-        raise argparse.ArgumentTypeError('Boolean value expected (True/False)')
+        raise argparse.ArgumentTypeError("Boolean value expected (True/False)")
 
 
 def masks_like(tensor, zero=False, generator=None, p=0.2):
@@ -193,14 +178,20 @@ def masks_like(tensor, zero=False, generator=None, p=0.2):
         if generator is not None:
             for u, v in zip(out1, out2):
                 random_num = torch.rand(
-                    1, generator=generator, device=generator.device).item()
+                    1, generator=generator, device=generator.device
+                ).item()
                 if random_num < p:
-                    u[:, 0] = torch.normal(
-                        mean=-3.5,
-                        std=0.5,
-                        size=(1,),
-                        device=u.device,
-                        generator=generator).expand_as(u[:, 0]).exp()
+                    u[:, 0] = (
+                        torch.normal(
+                            mean=-3.5,
+                            std=0.5,
+                            size=(1,),
+                            device=u.device,
+                            generator=generator,
+                        )
+                        .expand_as(u[:, 0])
+                        .exp()
+                    )
                     v[:, 0] = torch.zeros_like(v[:, 0])
                 else:
                     u[:, 0] = u[:, 0]
@@ -216,7 +207,7 @@ def masks_like(tensor, zero=False, generator=None, p=0.2):
 def best_output_size(w, h, dw, dh, expected_area):
     # float output size
     ratio = w / h
-    ow = (expected_area * ratio)**0.5
+    ow = (expected_area * ratio) ** 0.5
     oh = expected_area / ow
 
     # process width first
@@ -232,8 +223,7 @@ def best_output_size(w, h, dw, dh, expected_area):
     ratio2 = ow2 / oh2
 
     # compare ratios
-    if max(ratio / ratio1, ratio1 / ratio) < max(ratio / ratio2,
-                                                 ratio2 / ratio):
+    if max(ratio / ratio1, ratio1 / ratio) < max(ratio / ratio2, ratio2 / ratio):
         return ow1, oh1
     else:
         return ow2, oh2

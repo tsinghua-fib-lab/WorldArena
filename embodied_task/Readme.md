@@ -86,7 +86,7 @@ OUTPUT_DIR/
 │ └── aloha-agilex_clean_50
 │   └── aloha-agilex_clean_50
 │       └── first_frames
-        └── video
+│       └── video
 ```
 Run the data engine generation script.
 ```bash

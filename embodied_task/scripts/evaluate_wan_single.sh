@@ -15,7 +15,7 @@ export HF_HOME=./huggingface
 export HF_ENDPOINT=https://hf-mirror.com
 
 # ================== 配置区 ==================
-DATASET_PATH="The absolute path to your dataset." #like .//robotwin2.0_clean50_firstinstr_40
+DATASET_PATH="The absolute path to your dataset." #like .//robotwin2.0_clean50_firstinstr_10
 METADATA_FILE="./robotwin_metadata.json"
 
 # Data parameters

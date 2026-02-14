@@ -68,9 +68,9 @@ class VPP_Policy(pl.LightningModule):
             action_dim: int = 7,
             action_seq_len: int = 10,
             # 新加入的参数
-            video_model: str = 'vpp_original',
-            base_model_folder: str = "/ML-vePFS/protected/myd/wow-world-model/dit_models/checkpoints/WoW-1-Wan-1.3B-2M",
-            custom_dit_path: Optional[str] = "/ML-vePFS/protected/myd/wow-world-model/dit_models/checkpoints/WoW-1-Wan-1.3B-2M/WoW_video_dit.pt",
+            video_model: str = 'vpp_vidar',
+            base_model_folder: str = "./models/Wan2.2-TI2V-5B",
+            custom_dit_path: Optional[str] = "./models/wan_video/wan_video.pt",
             has_image_input: bool = True,
     ):
         super(VPP_Policy, self).__init__()
