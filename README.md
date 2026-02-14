@@ -35,7 +35,7 @@
 
 ## 📢 Updates
 
-- [2026/02/13] Initial release.
+- [2026/02/13] Code initial release.
 - [2026/02/13] Leaderboard release.
 
 
