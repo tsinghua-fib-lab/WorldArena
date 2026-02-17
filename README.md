@@ -119,4 +119,11 @@ For video quality evaluation, WorldArena references and partially builds upon th
 
 
 ## 📖 Citation
-
+```bibtex
+@article{shang2026worldarena,
+  title={WorldArena: A Unified Benchmark for Evaluating Perception and Functional Utility of Embodied World Models},
+  author={Shang, Yu and Li, Zhuohang and Ma, Yiding and Su, Weikang and Jin, Xin and Wang, Ziyou and Jin, Lei and Zhang, Xin and Tang, Yinzhou and Su, Haisheng and others},
+  journal={arXiv preprint arXiv:2602.08971},
+  year={2026}
+}
+```
