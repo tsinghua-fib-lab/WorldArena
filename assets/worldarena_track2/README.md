@@ -2,6 +2,81 @@
 
 > **CVPR 2026 WorldArena Challenge** — [Challenge Page](http://cvpr2026challenge.world-arena.ai/)
 
+## Task 1: Data Engine
+---
+📖 For detailed Evaluation Pipeline, see **[docs/DATA_ENGINE.md](docs/DATA_ENGINE.md)**.
+## 1. Data Preparation
+
+Download the official datasets from Hugging Face:
+
+- [WorldArena_Robotwin2.0](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0)
+
+---
+
+## 2. Submission Format
+
+Package your generated data and model metadata into a single archive (e.g. `.zip`, `.tar`). Name the archive:
+
+```text
+{Your_Model_Name}_eval_track2_data_engine
+```
+
+### 2.1 Archive layout
+
+Organize **image–action** outputs as follows:
+
+```text
+{Your_Model_Name}_eval_track2_data_engine/
+├── model_README.md               # Model documentation
+├── adjust_bottle/                # Task name
+│   ├── episode_0/                # Episode ID
+│   │   ├── label/
+│   │   │   ├── frame_0.json      # Keys: image_path, actions (length 40, joint14), state, instruction
+│   │   │   └── ...
+│   │   └── image/
+│   │       ├── frame_0.png
+│   │       └── ...
+│   └── ...
+├── click_bell/
+│   ├── episode_0/
+│   │   ├── label/
+│   │   │   ├── frame_0.json
+│   │   │   └── ...
+│   │   └── image/
+│   │       ├── frame_0.png
+│   │       └── ...
+│   └── ...
+└── ...
+```
+
+### 2.2 Model documentation (`model_README.md`)
+
+Copy and edit `examples/model_README.template.md`:
+
+| Field | Example |
+|-------|---------|
+| Model Name | `your_world_model` |
+| Action Space | `joint14` |
+| Open Source | `Yes` / `No` |
+
+---
+
+## 3. Submission Process
+
+### Step 1 — Package
+
+Place all generated data and `model_README.md` inside `{Your_Model_Name}_eval_track2_data_engine` before compressing.
+
+### Step 2 — Email
+
+Send the archive to **[WorldArena1@outlook.com](mailto:WorldArena1@outlook.com)** with:
+
+- **Subject:** `{Your_Model_Name}_eval_track2_data_engine`
+- **Attachment:** `{Your_Model_Name}_eval_track2_data_engine.zip` (or equivalent archive format)
+
+## Task 2: Policy Evaluator
+---
+
 Track 2 evaluates **world models** in closed-loop with a fixed policy. You provide the world model; we provide the policy, dataset, and evaluation pipeline.
 
 📖 For detailed technical documentation (dataset format, action space, bridge, rollout internals), see **[docs/DETAILS.md](docs/DETAILS.md)**.
@@ -90,12 +165,12 @@ python scripts/package_submission.py \
   --model-name my_model \
   --model-readme my_model_README.md \
   --video-dirs ./output/10data ./output/20data ./output/30data ./output/50data ./output/fulldata \
-  --output ./my_model_eval.zip
+  --output ./{Your_Model_Name}_eval_track2_policy_evaluator.zip
 ```
 
 ### 4c. Submit
 
-Email `my_model_eval.zip` to **WorldArena1@outlook.com**.
+Email `{Your_Model_Name}_eval_track2_policy_evaluator.zip` to **WorldArena1@outlook.com**.
 
 The archive structure will be:
 
