@@ -95,7 +95,7 @@ The official WorldArena leaderboard is hosted on HuggingFace: [![Leaderboard](ht
 
 
 ## 📤 Submission
-Please refer to [submission](https://github.com/tsinghua-fib-lab/WorldArena/blob/main/assets/README_submission.md) for result submission.
+Please refer to [submission](https://github.com/tsinghua-fib-lab/WorldArena/blob/main/assets/README_submission.md) for result submission of Track 1 and Track 2.
 
 **Note: Please use the latest version of the test_dataset `(released on 2026.3.6)` for the submission!**
 
