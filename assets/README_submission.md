@@ -1,64 +1,244 @@
 # WorldArena Evaluation and Submission Guideline
 
-This document outlines the procedure for evaluating your model on the WorldArena benchmark and submitting your results for the official leaderboard.
+> **CVPR 2026 WorldArena Challenge** — [Challenge Page](http://cvpr2026challenge.world-arena.ai/)
 
-## 1. Data Preparation
-
-First, download the test datasets from our official Hugging repository:
-[WorldArena_Robotwin2.0](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0)
-
-You can download the following folders:
-- `test_dataset`: Evaluation set for **Leaderboard**.
-- `val_dataset`: Used for the **Online Arena** (head-to-head video comparison). This set allows you to upload your generated videos for a specific episode and compare them against existing baselines with real-time metrics.
-
-Final evaluation results will be synchronized to `Leaderboard` and `Online Arena (optional)`, respectively.
-
-***Notice:*** *The final leaderboard is evaluated on the **test_dataset**. The **val_dataset** is designated for Arena visualization; its inclusion in the submission is optional.*
-
-### Inference Requirements
-For each episode in the test/validation sets, use your model to generate a video based on the provided initial frame (`first_frame`) and text instruction (`instruction`) or actions(`data/_traj_data`).
-
-- **Resolution**: Recommend to be **640×480** or higher.
-- **Length**: Generate **121 frames**.
-- **Frame Rate**: **24 fps**.
-
-
-## 2. Submission Format
-
-You need to package your generated videos and model information into a single archive (e.g., `.zip`, `.tar`).
-
-### A) Archive Structure
-Your submission should follow the format of [example_eval.zip](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0/blob/main/example_eval.zip). The archive should be named `{Your_Model_Name}_eval` and contain:
-1. **Video Folders**: Separate folders for each evaluation set (e.g., `example_test(_1,_2)`, `example_arena(_1,_2)`).
-2. **Model Documentation**: A `model_README.md` (or `.txt`) file.
-
-### B) Model Documentation Details
-The `model_README.md` should contain:
-- **Model Name**
-- **GitHub Repository (optional)** 
-- **Driver Type**: Action-driven or Text-driven
-- **Release Year**
-- **Open Source Status**: Yes/No
-- **Brief Description (optional)**
-- **Communication methods (optional)**
-- **Submission video set**: Specify which sets you are submitting (`example_test(_1,_2)`, `example_val(_1,_2)`, or `both`).
-- **Other information (optional)**
-
-
-## 3. Submission Process
-
-### Step 1: Package Files
-Ensure all videos and the `model_README.md` are correctly organized within the `{Your_Model_Name}_eval` archive.
-
-### Step 2: Send Email
-Email your archive to: **WorldArena1@outlook.com**
-- **Subject**: `{Your_Model_Name}_evaluation`
-- **Attachment**: `{Your_Model_Name}_eval.zip` 
+This document describes how to evaluate your model on the WorldArena benchmark and submit results for the official leaderboard.
 
 ---
 
-## 4. Evaluation Cycle & Leaderboard Updates
+## Contents
 
-- **Updates**: After your submission, the model will be evaluated and updated to the [WorldArena Leaderboard](https://huggingface.co/spaces/WorldArena/WorldArena).
-- **Notification**: We will send you a confirmation email once the evaluation is complete. Thank you for your patience and contribution!
+- [Track 1: Video Quality](#track-1-video-quality)
+- [Track 2: Functional Performance](#track-2-functional-performance)
+  - [Task 1: Data Engine](#task-1-data-engine)
+  - [Task 2: Policy Evaluator](#task-2-policy-evaluator)
 
+---
+
+## Track 1: Video Quality
+
+**Pipeline:** [video_quality/README.md](../video_quality/README.md)
+
+### 1. Data preparation
+
+Download the test datasets from the official Hugging Face dataset:
+
+- [WorldArena_Robotwin2.0](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0)
+
+| Folder | Purpose |
+|--------|---------|
+| `test_dataset` | Evaluation set for the **leaderboard**. |
+| `val_dataset` | **Online Arena** (head-to-head video comparison). You can upload generated videos for a chosen episode and compare against baselines with real-time metrics. |
+
+Leaderboard and Online Arena are updated from these sets respectively.
+
+> **Note:** Final leaderboard scores use **`test_dataset`**. **`val_dataset`** is for Arena visualization only; including it in your submission is **optional**.
+
+#### Inference requirements
+
+For each episode in the test or validation set, generate a video from the provided initial frame (`first_frame`) and text instruction (`instruction`) or actions (`data/_traj_data`).
+
+| Item | Requirement |
+|------|-------------|
+| Resolution | **640×480** or higher (recommended) |
+| Length | **121** frames |
+| Frame rate | **24** fps |
+
+### 2. Submission format
+
+Package generated videos and model metadata in one archive (e.g. `.zip`, `.tar`).
+
+#### 2.1 Archive structure
+
+Follow the layout of [example_eval.zip](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0/blob/main/example_eval.zip). Name the archive `{Your_Model_Name}_eval` and include:
+
+1. **Video folders** — one per evaluation set (e.g. `example_test(_1,_2)`, `example_arena(_1,_2)`).
+2. **Model documentation** — `model_README.md` or `model_README.txt`.
+
+#### 2.2 `model_README` contents
+
+- **Model name**
+- **GitHub repository** (optional)
+- **Driver type:** action-driven or text-driven
+- **Release year**
+- **Open source:** Yes / No
+- **Brief description** (optional)
+- **Contact** (optional)
+- **Submitted video sets:** `example_test(_1,_2)`, `example_val(_1,_2)`, or both
+- **Other** (optional)
+
+### 3. Submission process
+
+1. **Package** — Place all videos and `model_README` inside `{Your_Model_Name}_eval`.
+2. **Email** — Send the archive to **[WorldArena1@outlook.com](mailto:WorldArena1@outlook.com)**  
+   - **Subject:** `{Your_Model_Name}_evaluation`  
+   - **Attachment:** `{Your_Model_Name}_eval.zip`
+
+### 4. Evaluation cycle and leaderboard
+
+- After submission, results are evaluated and published on the [WorldArena Leaderboard](https://huggingface.co/spaces/WorldArena/WorldArena).
+- You will receive a confirmation email when evaluation finishes. Thank you for your patience and contribution.
+
+---
+
+## Track 2: Functional Performance
+
+### Task 1: Data Engine
+
+**Pipeline:** [DATA_ENGINE.md](../embodied_task/worldarena_track2/docs/DATA_ENGINE.md)
+
+#### 1. Data preparation
+
+Download the official dataset from Hugging Face:
+
+- [WorldArena_Robotwin2.0](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0)
+
+#### 2. Submission format
+
+Use a single archive (e.g. `.zip`, `.tar`) named:
+
+```text
+{Your_Model_Name}_eval_track2_data_engine
+```
+
+**Layout** — Organize image–action outputs as follows:
+
+```text
+{Your_Model_Name}_eval_track2_data_engine/
+├── model_README.md               # Model documentation
+├── adjust_bottle/                # Task name
+│   ├── episode_0/                # Episode ID
+│   │   ├── label/
+│   │   │   ├── frame_0.json      # Keys: image_path, actions (length 40, joint14), state, instruction
+│   │   │   └── ...
+│   │   └── image/
+│   │       ├── frame_0.png
+│   │       └── ...
+│   └── ...
+├── click_bell/
+│   ├── episode_0/
+│   │   ├── label/
+│   │   │   ├── frame_0.json
+│   │   │   └── ...
+│   │   └── image/
+│   │       ├── frame_0.png
+│   │       └── ...
+│   └── ...
+└── ...
+```
+
+**`model_README.md`** — Copy and edit [model_README.template.md](../embodied_task/worldarena_track2/examples/model_README.template.md):
+
+| Field | Example |
+|-------|---------|
+| Model Name | `your_world_model` |
+| Action Space | `joint14` |
+| Open Source | `Yes` / `No` |
+
+#### 3. Submission process
+
+1. **Package** — Put all generated data and `model_README.md` inside `{Your_Model_Name}_eval_track2_data_engine`, then compress.
+2. **Email** — Send to **[WorldArena1@outlook.com](mailto:WorldArena1@outlook.com)**  
+   - **Subject:** `{Your_Model_Name}_eval_track2_data_engine`  
+   - **Attachment:** `{Your_Model_Name}_eval_track2_data_engine.zip` (or equivalent)
+
+---
+
+### Task 2: Policy Evaluator
+
+Track 2 evaluates **world models** in closed loop with a fixed policy. You provide the world model; we provide the policy, dataset, and evaluation pipeline.
+
+**Details:** [DETAILS.md](../embodied_task/worldarena_track2/docs/DETAILS.md) (dataset format, action space, bridge, rollout internals)
+
+#### 1. Environment setup
+
+**1a. Policy environment ([openpi](https://github.com/Physical-Intelligence/openpi))**
+
+```bash
+git clone --recurse-submodules https://github.com/Physical-Intelligence/openpi.git
+cd openpi
+GIT_LFS_SKIP_SMUDGE=1 uv sync
+GIT_LFS_SKIP_SMUDGE=1 uv pip install -e .
+```
+
+**1b. Policy checkpoints (5 variants)**
+
+```bash
+huggingface-cli download WorldArena/WorldArena \
+  --repo-type model --local-dir ./policy_ckpt
+```
+
+This downloads `10data/`, `20data/`, `30data/`, `50data/`, `fulldata/` — each with `model.safetensors`, `metadata.pt`, and norm stats.
+
+**1c. Dataset (500 episodes, ≈21 MB)**
+
+```bash
+bash scripts/download_dataset.sh
+# or manually:
+wget https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0/resolve/main/dataset.tar.gz
+tar -xzf dataset.tar.gz
+```
+
+#### 2. Write your adapter
+
+Add an adapter under [embodied_task/worldarena_track2/src/worldarena_track2_template/adapters/](../embodied_task/worldarena_track2/src/worldarena_track2_template/adapters/). Examples:
+
+| File | Use when |
+|------|----------|
+| `example_joint14.py` | WM trained on **joint angles** (no bridge) |
+| `example_endpose14.py` | WM trained on **end-effector poses** (kNN bridge) |
+
+Implement `build_command()` — it returns the shell command to run your world-model rollout script.
+
+> **Action space:** `joint14` → `bridge_mode = "passthrough"` · `endpose14` → `bridge_mode = "task_knn"` (see [DETAILS.md — bridge](../embodied_task/worldarena_track2/docs/DETAILS.md)).
+
+#### 3. Run generation (5 policies × 500 episodes)
+
+```bash
+for variant in 10data 20data 30data 50data fulldata; do
+  python scripts/run_generation.py \
+    --wm <your_wm> \
+    --dataset-root ./dataset \
+    --output-dir ./output/${variant} \
+    --policy-variant ${variant} \
+    --max-episode-index 500
+done
+```
+
+Output: **2500** videos (5 folders × 500 episodes each).
+
+#### 4. Package and submit
+
+**4a. `model_README.md`** — Copy and edit `examples/model_README.template.md`:
+
+| Field | Example |
+|-------|---------|
+| Model Name | `my_world_model` |
+| Action Space | `joint14` or `endpose14` |
+| Open Source | `Yes` / `No` |
+
+**4b. Package**
+
+```bash
+python scripts/package_submission.py \
+  --model-name my_model \
+  --model-readme my_model_README.md \
+  --video-dirs ./output/10data ./output/20data ./output/30data ./output/50data ./output/fulldata \
+  --output ./{Your_Model_Name}_eval_track2_policy_evaluator.zip
+```
+
+**4c. Submit**
+
+Email `{Your_Model_Name}_eval_track2_policy_evaluator.zip` to **[WorldArena1@outlook.com](mailto:WorldArena1@outlook.com)**.
+
+Resulting archive layout:
+
+```text
+my_model_eval/
+├── my_model_10data/    # 500 videos
+├── my_model_20data/
+├── my_model_30data/
+├── my_model_50data/
+├── my_model_fulldata/
+└── model_README.md
+```

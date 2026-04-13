@@ -1,7 +1,6 @@
 # Technical Details
 
 > This document provides in-depth technical details for Track 2.
-> For a quick-start guide, see the main [README](../README.md).
 
 ---
 

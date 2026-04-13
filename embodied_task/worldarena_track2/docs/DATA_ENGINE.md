@@ -1,7 +1,6 @@
 # Evaluation Pipeline
 
 > This document provides evaluation pipeline for Track 2: data engine.
-> For a quick-start guide, see the main [README](../README.md).
 
 ---
 We evaluate submissions with the **official π₀.₅ policy** on **five RoboTwin 2.0 subtasks**: `adjust_bottle`, `click_bell`, `blocks_ranking_rgb`, `open_laptop`, `pick_dual_bottles`.
