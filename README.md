@@ -100,7 +100,7 @@ Please refer to [submission](https://github.com/tsinghua-fib-lab/WorldArena/blob
 **Note: Please use the latest version of the test_dataset `(released on 2026.3.6)` for the submission!**
 
 ## 🎮 Online Arena
-Try out our new Arena online battle!  👉 **Start here:** [Arena Online Battle](https://sd70gmjk5ql2h8d8reen0.apigateway-cn-beijing.volceapi.com/)
+Try out our new Arena online battle!  👉 **Start here:** [Arena Online Battle](https://sd7erkao9a77ct8h5459g.apigateway-cn-beijing.volceapi.com/)
 
 We invite you to experience our new Arena online battle feature. Upload your own video to evaluate metrics in real time and visually compare it with the **best-performing** video on the leaderboard. To get started, follow the [submission guide](https://github.com/tsinghua-fib-lab/WorldArena/blob/main/assets/README_submission.md) to download the `val_dataset` and select any of the 500 videos to join the interactive battle. 
 
