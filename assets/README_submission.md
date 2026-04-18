@@ -79,6 +79,17 @@ Follow the layout of [example_eval.zip](https://huggingface.co/datasets/WorldAre
 - After submission, results are evaluated and published on the [WorldArena Leaderboard](https://huggingface.co/spaces/WorldArena/WorldArena).
 - You will receive a confirmation email when evaluation finishes. Thank you for your patience and contribution.
 
+> **Notice (Submission Queue Policy):**
+>
+> During peak submission periods, all evaluations are processed strictly in **first-in-first-out (FIFO)** order.
+>
+> Repeated submissions of the same models in a short time window are discouraged. In such cases:
+>
+> - Only the **earliest submission** will be prioritized.
+> - Later duplicate submissions may be **delayed or deprioritized** in the evaluation queue.
+>
+> Please plan your submissions accordingly to avoid unnecessary delays.
+
 ---
 
 ## Track 2: Functional Performance
@@ -232,6 +243,16 @@ python scripts/package_submission.py \
 Email `{Your_Model_Name}_eval_track2_policy_evaluator.zip` to **[WorldArena1@outlook.com](mailto:WorldArena1@outlook.com)**.
 
 Resulting archive layout:
+
+```text
+my_model_eval/
+├── my_model_10data/    # 500 videos
+├── my_model_20data/
+├── my_model_30data/
+├── my_model_50data/
+├── my_model_fulldata/
+└── model_README.md
+```
 
 ```text
 my_model_eval/
