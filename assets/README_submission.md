@@ -58,6 +58,7 @@ Follow the layout of [example_eval.zip](https://huggingface.co/datasets/WorldAre
 #### 2.2 `model_README` contents
 
 - **Model name**
+- **Affiliation / Organization** **(Required. Submissions without affiliation/organization information will be considered invalid.)**</span>
 - **GitHub repository** (optional)
 - **Driver type:** action-driven or text-driven
 - **Release year**
