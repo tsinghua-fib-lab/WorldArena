@@ -41,7 +41,7 @@ For each episode in the test or validation set, generate a video from the provid
 | Item | Requirement |
 |------|-------------|
 | Resolution | **640×480** or higher (recommended) |
-| Length | **121** frames |
+| Length | **Text-driven:** fixed **121** frames.<br>**Action-driven:** rollout according to the provided action sequence length, and align the generated video length with the corresponding GT trajectory length. |
 | Frame rate | **24** fps |
 
 ### 2. Submission format
