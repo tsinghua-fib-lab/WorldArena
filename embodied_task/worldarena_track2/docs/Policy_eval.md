@@ -1,6 +1,7 @@
 # VLM Policy Evaluator
 
 A script for evaluating robot policy videos with an OpenAI-compatible vision-language model API.
+The evaluation script is [vlm_policy_evaluator.py](embodied_task/worldarena_track2/scripts/vlm_policy_evaluator.py)
 
 ## Default VLM Model
 
