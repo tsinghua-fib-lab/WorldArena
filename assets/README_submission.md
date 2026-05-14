@@ -268,3 +268,6 @@ my_model_eval/
 ├── my_model_fulldata/
 └── model_README.md
 ```
+#### 5. Run evaluation locally (5 policies × 500 episodes)
+
+see [Policy_eval.md — bridge](../embodied_task/worldarena_track2/docs/Policy_eval.md)
