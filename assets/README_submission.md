@@ -270,4 +270,4 @@ my_model_eval/
 ```
 #### 5. Run evaluation locally (5 policies × 500 episodes)
 
-see [Policy_eval.md — bridge](../embodied_task/worldarena_track2/docs/Policy_eval.md)
+see [Policy_eval.md](../embodied_task/worldarena_track2/docs/Policy_eval.md)
