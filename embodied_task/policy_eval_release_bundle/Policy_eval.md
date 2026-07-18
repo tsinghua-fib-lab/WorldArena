@@ -9,11 +9,11 @@ The evaluator compares each submitted policy rollout video against a ground-trut
 The policy evaluation release has two parts:
 
 1. Code in this repository:
-   - `embodied_task/worldarena_track2/scripts/vlm_policy_evaluator.py`
-   - `embodied_task/worldarena_track2/scripts/calculate_policy_pearson_r.py`
-   - this document, `embodied_task/worldarena_track2/docs/Policy_eval.md`
+   - [vlm_policy_evaluator.py](https://github.com/tsinghua-fib-lab/WorldArena/edit/main/embodied_task/policy_eval_release_bundle/vlm_policy_evaluator.py)
+   - [calculate_policy_pearson_r.py](https://github.com/tsinghua-fib-lab/WorldArena/edit/main/embodied_task/policy_eval_release_bundle/calculate_policy_pearson_r.py)
+   - this document,[Policy_eval.md](https://github.com/tsinghua-fib-lab/WorldArena/edit/main/embodied_task/policy_eval_release_bundle/Policy_eval.md)
 2. Ground-truth package hosted as a dataset artifact:
-   - `worldarena_track2_policy_eval_gt.tar.gz`
+   - [worldarena_track2_policy_eval_gt.tar.gz](https://huggingface.co/datasets/WorldArena/WorldArena_Robotwin2.0/blob/main/worldarena_track2_policy_eval_gt.tar.gz)
 
 The GT package is required for public reproducibility. It is different from the rollout dataset used to generate submissions.
 
