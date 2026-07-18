@@ -165,6 +165,7 @@ Use a single archive (e.g. `.zip`, `.tar`) named:
 Track 2 evaluates **world models** in closed loop with a fixed policy. You provide the world model; we provide the policy, dataset, and evaluation pipeline.
 
 **Details:** [DETAILS.md](../embodied_task/worldarena_track2/docs/DETAILS.md) (dataset format, action space, bridge, rollout internals)
+**Full pipeline:**[Policy_eval.md](../embodied_task/policy_eval_release_bundle/Policy_eval.md")
 
 #### 1. Environment setup
 
