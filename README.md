@@ -4,9 +4,6 @@
 
 <div align="center">
 
-<a href="http://cvpr2026challenge.world-arena.ai/">
-  <img src="https://img.shields.io/badge/Challenge-CVPR%202026-2563eb?style=for-the-badge&logo=googlescholar&logoColor=white">
-</a>
 
 <a href="https://world-arena.ai/">
   <img src="https://img.shields.io/badge/Website-WorldArena-2563eb?style=for-the-badge&logo=googlechrome&logoColor=white">
@@ -99,10 +96,6 @@ Please refer to [submission](https://github.com/tsinghua-fib-lab/WorldArena/blob
 
 **Note: Please use the latest version of the test_dataset `(released on 2026.3.6)` for the submission!**
 
-## 🎮 Online Arena
-Try out our new Arena online battle!  👉 **Start here:** [Arena Online Battle](https://sd7erkao9a77ct8h5459g.apigateway-cn-beijing.volceapi.com/)
-
-We invite you to experience our new Arena online battle feature. Upload your own video to evaluate metrics in real time and visually compare it with the **best-performing** video on the leaderboard. To get started, follow the [submission guide](https://github.com/tsinghua-fib-lab/WorldArena/blob/main/assets/README_submission.md) to download the `val_dataset` and select any of the 500 videos to join the interactive battle. 
 
 ## 👥 Human Evaluation
 Be part of shaping the future of embodied world models!  👉 **Start here:**  [Human Evaluation](https://sd64n7jjtvotb9m1apn80.apigateway-cn-beijing.volceapi.com/)
