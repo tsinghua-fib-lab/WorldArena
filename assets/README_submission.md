@@ -2,7 +2,7 @@
 
 This document describes how to evaluate your model on the WorldArena benchmark locally。
 
-Note:The WorldArena Challenge has officially concluded, with the submission deadline being June 30, 2026. The ground truth (GT) and evaluation resources have been completely released and are now publicly available. You may conduct local evaluations by following the provided documentation. For leaderboard updates, please pay attention to the upcoming WorldArena Challenge 2.0.
+Note:The WorldArena Challenge has officially concluded, with the submission deadline being June 30, 2026. The ground truth (GT) and evaluation resources have been completely released and are now publicly available. You may conduct local evaluations by following the provided documentation. For leaderboard updates, please pay attention to [WorldArena Challenge 2.0](http://iros2026challenge.world-arena.ai/).
 ---
 
 ## Contents
