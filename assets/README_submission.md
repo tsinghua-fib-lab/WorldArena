@@ -41,7 +41,7 @@ For each episode in the test set, generate a video from the provided initial fra
 
 ### 2. Compute full score
 
-
+The final score is obtained by computing the arithmetic average of all evaluation indicators and multiplying the result by 100 to express it on a 100‑point scale
 ---
 
 ## Track 2: Functional Performance
