@@ -41,7 +41,7 @@ METRIC_KEY_MAP: Dict[str, str] = {
     "flow_score": "Flow Score",
     "depth_accuracy": "Depth Accuracy",
     "trajectory_accuracy": "Trajectory Accuracy",
-    "photometric_consistency": "Photometric Consistency",
+    "photometric_smoothness": "Photometric Consistency",
     "motion_smoothness": "Motion Smoothness",
     "jepa_similarity": "JEPA Similarity",
 }
